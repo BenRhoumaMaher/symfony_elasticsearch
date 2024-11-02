@@ -12,22 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SearchController extends AbstractController
 {
-    /**
-     * Constructor injection of FinderInterface to enable book search.
-     *
-     * @param FinderInterface $bookFinder The service for searching books with Elastica.
-     */
     public function __construct(private FinderInterface $bookFinder)
     {
     }
 
-    /**
-     * Route for searching books by title.
-     *
-     * @Route("/search", name="app_search")
-     * @param Request $request The HTTP request, which contains the search query.
-     * @return Response The rendered search results.
-     */
     #[Route('/search', name: 'app_search')]
     public function index(Request $request): Response
     {
