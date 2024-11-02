@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Book Search{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Search Books</h1>
+
+    <form method="get" action="{{ path('app_book_search') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search by title, summary, or writer's name">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    {% if results is not empty %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Summary</th>
+                    <th>Writer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in results %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.summary }}</td>
+                        <td>{{ book.writer }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {% if query %}
+            <p class="text-muted">No results found for "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
